@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-clean-news-api/internal/adapters/auth"
 	"go-clean-news-api/internal/adapters/db/user"
+	"go-clean-news-api/internal/domain/entity"
 	"net/http"
 )
 
@@ -15,7 +16,7 @@ func NewService(storage user.Storage) Service{
 	return &service{storage: storage}
 }
 
-func (s *service) RegisterUser(context *gin.Context, user *User) *User{
+func (s *service) RegisterUser(context *gin.Context, user *entity.User) *entity.User{
 	if err := user.HashPassword(user.Password); err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		context.Abort()

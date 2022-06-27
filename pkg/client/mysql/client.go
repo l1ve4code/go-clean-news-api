@@ -1,7 +1,7 @@
 package mysql
 
 import (
-	"go-clean-news-api/internal/domain/user"
+	"go-clean-news-api/internal/domain/entity"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
@@ -18,6 +18,6 @@ func NewClient(connString string) (*gorm.DB, error){
 }
 
 func Migrate(Instance *gorm.DB) {
-	Instance.AutoMigrate(&user.User{})
+	Instance.AutoMigrate(&entity.User{})
 	log.Println("Database Migration Completed!")
 }

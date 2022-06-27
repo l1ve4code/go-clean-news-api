@@ -2,6 +2,7 @@ package user
 
 import (
 	"github.com/gin-gonic/gin"
+	"go-clean-news-api/internal/domain/entity"
 	"go-clean-news-api/internal/domain/user"
 	"net/http"
 )
@@ -15,7 +16,7 @@ func NewHandler(service user.Service) Handler{
 }
 
 func (h *handler) RegisterUser(context *gin.Context){
-	var user user.User
+	var user entity.User
 	if err := context.ShouldBindJSON(&user); err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		context.Abort()
