@@ -8,10 +8,11 @@ import (
 
 func main() {
 
+	config.LoadAppConfig()
 	MySQL := composites.NewMySQLComposite(config.AppConfig.ConnectionString)
 	UserComposite := composites.NewUserComposite(MySQL)
 	ControllerComposite := composites.NewControllerComposite(UserComposite)
 
-	routes.InitRoutes(ControllerComposite).Run(":8080")
+	routes.InitRoutes(ControllerComposite).Run(config.AppConfig.Port)
 
 }
